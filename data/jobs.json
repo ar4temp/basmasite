@@ -1,0 +1,265 @@
+{
+  "updated": "2026-08-31T00:09:40",
+  "jobs": [
+    {
+      "id": "WH-104",
+      "title": "Warehouse Operative",
+      "category": "Logistics",
+      "location": "Riyadh",
+      "type": "Full-time",
+      "experience": "1+ years",
+      "salary": "SAR 2,000 – 2,600 + accommodation",
+      "vacancies": 25,
+      "urgent": true,
+      "posted": "2026-08-26",
+      "active": true,
+      "summary": "Picking, packing and dispatch for a large distribution centre in Riyadh. Uniform, transport and accommodation provided.",
+      "requirements": [
+        "Transferable Iqama or eligible for sponsorship transfer",
+        "Able to lift up to 25 kg repeatedly through a shift",
+        "Basic English or Arabic for safety instructions",
+        "Willing to work rotating shifts including nights"
+      ],
+      "benefits": [
+        "Shared accommodation and daily transport provided",
+        "Overtime paid at the statutory rate through WPS",
+        "Annual leave with return air ticket",
+        "Medical insurance and GOSI registration"
+      ]
+    },
+    {
+      "id": "FL-231",
+      "title": "Forklift Operator",
+      "category": "Logistics",
+      "location": "Dammam",
+      "type": "Full-time",
+      "experience": "2+ years",
+      "salary": "SAR 2,800 – 3,400",
+      "vacancies": 8,
+      "urgent": false,
+      "posted": "2026-08-24",
+      "active": true,
+      "summary": "Certified forklift operators for a port-side logistics yard. Valid Saudi licence and operator certificate required.",
+      "requirements": [
+        "Valid forklift operator certificate",
+        "Saudi driving licence preferred",
+        "Minimum 2 years in a warehouse or port environment",
+        "Clean safety record"
+      ],
+      "benefits": [
+        "Housing allowance",
+        "Transport provided",
+        "Medical insurance and GOSI",
+        "Annual leave with air ticket"
+      ]
+    },
+    {
+      "id": "HK-088",
+      "title": "Housekeeping Attendant",
+      "category": "Hospitality",
+      "location": "Riyadh",
+      "type": "Full-time",
+      "experience": "Entry level",
+      "salary": "SAR 1,800 – 2,200 + accommodation",
+      "vacancies": 40,
+      "urgent": true,
+      "posted": "2026-08-28",
+      "active": true,
+      "summary": "Room attendants for four and five star hotel properties in Riyadh. Full training provided, no prior hotel experience required.",
+      "requirements": [
+        "Transferable Iqama or eligible for transfer",
+        "Presentable and punctual",
+        "Basic English helpful but not essential",
+        "Able to stand for extended periods"
+      ],
+      "benefits": [
+        "Accommodation and meals on duty",
+        "Uniform and laundry provided",
+        "Structured training and progression to supervisor",
+        "Medical insurance and GOSI"
+      ]
+    },
+    {
+      "id": "CH-045",
+      "title": "Commis Chef",
+      "category": "Hospitality",
+      "location": "Jeddah",
+      "type": "Full-time",
+      "experience": "2+ years",
+      "salary": "SAR 2,500 – 3,200",
+      "vacancies": 6,
+      "urgent": false,
+      "posted": "2026-08-20",
+      "active": true,
+      "summary": "Kitchen support for hotel and contract catering operations in Jeddah. Experience in a professional kitchen required.",
+      "requirements": [
+        "Minimum 2 years in a commercial kitchen",
+        "Food hygiene awareness",
+        "Able to work split shifts",
+        "Transferable Iqama"
+      ],
+      "benefits": [
+        "Accommodation and duty meals",
+        "Overtime through WPS",
+        "Medical insurance and GOSI",
+        "Annual leave with air ticket"
+      ]
+    },
+    {
+      "id": "CL-317",
+      "title": "Facility Cleaner",
+      "category": "Cleaning",
+      "location": "Riyadh",
+      "type": "Full-time",
+      "experience": "Entry level",
+      "salary": "SAR 1,500 – 1,900 + accommodation",
+      "vacancies": 60,
+      "urgent": true,
+      "posted": "2026-08-29",
+      "active": true,
+      "summary": "Cleaning teams for commercial towers, malls and hospitals across Riyadh. Immediate start for candidates with transferable status.",
+      "requirements": [
+        "Transferable Iqama or eligible for transfer",
+        "Physically fit for active shift work",
+        "Reliable and punctual",
+        "No formal qualifications required"
+      ],
+      "benefits": [
+        "Shared accommodation provided",
+        "Daily transport to site",
+        "Uniform and equipment supplied",
+        "Medical insurance and GOSI registration"
+      ]
+    },
+    {
+      "id": "EL-072",
+      "title": "Industrial Electrician",
+      "category": "Industrial",
+      "location": "Jubail",
+      "type": "Contract",
+      "experience": "4+ years",
+      "salary": "SAR 4,000 – 5,500",
+      "vacancies": 12,
+      "urgent": false,
+      "posted": "2026-08-18",
+      "active": true,
+      "summary": "Maintenance electricians for a petrochemical plant in Jubail. Industrial background and recognised trade certification essential.",
+      "requirements": [
+        "Recognised electrical trade certificate",
+        "Minimum 4 years industrial or plant experience",
+        "Ability to read electrical schematics",
+        "Safety induction and PPE compliance"
+      ],
+      "benefits": [
+        "Camp accommodation and messing",
+        "Site transport",
+        "Overtime and shift allowances",
+        "Medical insurance, GOSI and annual ticket"
+      ]
+    },
+    {
+      "id": "WD-119",
+      "title": "Certified Welder (6G)",
+      "category": "Industrial",
+      "location": "Jubail",
+      "type": "Contract",
+      "experience": "5+ years",
+      "salary": "SAR 4,500 – 6,000",
+      "vacancies": 15,
+      "urgent": true,
+      "posted": "2026-08-27",
+      "active": true,
+      "summary": "6G certified welders for pipeline and structural fabrication. Trade test required before mobilisation.",
+      "requirements": [
+        "Valid 6G welding certification",
+        "Minimum 5 years pipeline or structural experience",
+        "Must pass an on-site trade test",
+        "Aramco approval an advantage"
+      ],
+      "benefits": [
+        "Camp accommodation and messing",
+        "Trade test costs covered",
+        "Overtime at premium rates",
+        "Medical insurance, GOSI and annual ticket"
+      ]
+    },
+    {
+      "id": "DR-260",
+      "title": "Heavy Truck Driver",
+      "category": "Logistics",
+      "location": "Riyadh",
+      "type": "Full-time",
+      "experience": "3+ years",
+      "salary": "SAR 3,000 – 3,800",
+      "vacancies": 10,
+      "urgent": false,
+      "posted": "2026-08-22",
+      "active": true,
+      "summary": "Long-haul and distribution drivers. Valid Saudi heavy vehicle licence is mandatory.",
+      "requirements": [
+        "Valid Saudi heavy vehicle driving licence",
+        "Minimum 3 years commercial driving",
+        "Clean traffic record on Absher",
+        "Familiar with Kingdom-wide routes"
+      ],
+      "benefits": [
+        "Accommodation provided",
+        "Trip and overtime allowances",
+        "Medical insurance and GOSI",
+        "Annual leave with air ticket"
+      ]
+    },
+    {
+      "id": "SC-011",
+      "title": "Site Supervisor",
+      "category": "Corporate",
+      "location": "Riyadh",
+      "type": "Full-time",
+      "experience": "5+ years",
+      "salary": "SAR 6,000 – 8,500",
+      "vacancies": 4,
+      "urgent": false,
+      "posted": "2026-08-15",
+      "active": true,
+      "summary": "Supervisors to manage deployed teams, attendance, welfare and client reporting across Riyadh contracts.",
+      "requirements": [
+        "Minimum 5 years supervising blue-collar teams in KSA",
+        "Fluent English, Arabic or Hindi/Urdu an advantage",
+        "Comfortable with attendance and reporting systems",
+        "Valid Saudi driving licence"
+      ],
+      "benefits": [
+        "Housing and transport allowance",
+        "Performance bonus",
+        "Medical insurance for self",
+        "Annual leave with air ticket"
+      ]
+    },
+    {
+      "id": "RC-003",
+      "title": "Recruitment Coordinator",
+      "category": "Corporate",
+      "location": "Riyadh (Head Office)",
+      "type": "Full-time",
+      "experience": "2+ years",
+      "salary": "Competitive",
+      "vacancies": 2,
+      "urgent": false,
+      "posted": "2026-08-12",
+      "active": true,
+      "summary": "In-house role coordinating candidate pipelines, Qiwa contracts and mobilisation schedules. Saudi nationals encouraged to apply.",
+      "requirements": [
+        "2+ years in recruitment, HR or manpower operations",
+        "Working knowledge of Qiwa and Muqeem an advantage",
+        "Strong written English and Arabic",
+        "Confident with spreadsheets and applicant tracking"
+      ],
+      "benefits": [
+        "Head office role, Sunday to Thursday",
+        "Saudization incentive for Saudi nationals",
+        "Medical insurance and GOSI",
+        "Training and professional development"
+      ]
+    }
+  ]
+}

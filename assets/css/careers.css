@@ -1,0 +1,903 @@
+/**
+* Careers, application form and CV builder
+* Scoped to new classes only. No existing template rules are modified.
+* Uses the site's existing custom properties so the brand palette stays authoritative.
+*/
+
+/*--------------------------------------------------------------
+# Shared brand button
+--------------------------------------------------------------*/
+.btn-brand {
+  display: inline-block;
+  background: var(--accent-color);
+  color: var(--contrast-color, #fff);
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: var(--fs-base);
+  border: 0;
+  transition: 0.3s;
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.btn-brand:hover {
+  background: color-mix(in srgb, var(--accent-color), black 12%);
+  color: var(--contrast-color, #fff);
+}
+
+.btn-brand-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--accent-color);
+  padding: 12px 30px;
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: var(--fs-base);
+  transition: 0.3s;
+  text-decoration: none;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.btn-brand-outline:hover {
+  background: var(--accent-color);
+  color: var(--contrast-color, #fff);
+}
+
+/*--------------------------------------------------------------
+# Careers stats
+--------------------------------------------------------------*/
+.careers-stats h3 {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 4px;
+}
+
+.careers-stats p {
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# Job toolbar: search and filters
+--------------------------------------------------------------*/
+.job-toolbar {
+  background: var(--surface-color);
+  padding: 22px 24px;
+  border-radius: 5px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  margin-bottom: 22px;
+}
+
+.job-search {
+  position: relative;
+}
+
+.job-search i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-subtle);
+  pointer-events: none;
+}
+
+.job-search input {
+  padding-left: 40px;
+  height: 46px;
+  border-color: var(--text-faint);
+  font-size: var(--fs-base);
+}
+
+.job-search input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color), transparent 85%);
+}
+
+.job-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.job-filters button {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  color: var(--default-color);
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.job-filters button:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.job-filters button.active {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #fff;
+}
+
+.job-result-count {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+@media (max-width: 991px) {
+  .job-filters {
+    justify-content: flex-start;
+  }
+}
+
+/*--------------------------------------------------------------
+# Job cards
+--------------------------------------------------------------*/
+.job-card {
+  background: var(--surface-color);
+  border-radius: 5px;
+  padding: 26px 28px;
+  height: 100%;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+  transition: 0.3s;
+  position: relative;
+}
+
+.job-card:hover {
+  box-shadow: 0 6px 34px rgba(0, 0, 0, 0.09);
+  transform: translateY(-3px);
+}
+
+.job-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.job-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: var(--heading-color);
+  line-height: 1.3;
+}
+
+.job-ref {
+  font-size: var(--fs-2xs);
+  letter-spacing: 0.6px;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.job-urgent {
+  background: var(--color-danger);
+  color: #fff;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 14px 0;
+  padding: 14px 0;
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+}
+
+.job-meta span {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.job-meta i {
+  color: var(--accent-color);
+  font-size: var(--fs-base);
+}
+
+.job-summary {
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+}
+
+.job-detail {
+  display: none;
+  border-top: 1px dashed color-mix(in srgb, var(--default-color), transparent 85%);
+  padding-top: 16px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.job-detail.open {
+  display: block;
+}
+
+.job-detail h5 {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--heading-color);
+  margin: 0 0 10px 0;
+}
+
+.job-detail ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px 0;
+}
+
+.job-detail li {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 7px;
+  color: var(--text-muted);
+}
+
+.job-detail li::before {
+  content: "\F26E";
+  font-family: "bootstrap-icons";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-color);
+  font-size: var(--fs-xs);
+}
+
+.job-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.job-toggle {
+  background: none;
+  border: 0;
+  color: var(--accent-color);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 12px 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.job-toggle i {
+  transition: transform 0.25s;
+}
+
+.job-toggle[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.job-posted {
+  font-size: var(--fs-2xs);
+  color: var(--text-subtle);
+  margin-left: auto;
+}
+
+/*--------------------------------------------------------------
+# Empty state
+--------------------------------------------------------------*/
+.job-empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.job-empty i {
+  font-size: 54px;
+  color: var(--text-faint);
+}
+
+.job-empty h4 {
+  margin: 16px 0 8px;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.job-empty p {
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto 22px;
+  font-size: var(--fs-base);
+}
+
+/*--------------------------------------------------------------
+# Speculative application box
+--------------------------------------------------------------*/
+.speculative-box {
+  background: var(--surface-color);
+  border-left: 4px solid var(--accent-color);
+  border-radius: 5px;
+  padding: 36px 40px;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.06);
+}
+
+.speculative-box h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.speculative-box p {
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .speculative-box {
+    padding: 28px 24px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Multi-step application form
+--------------------------------------------------------------*/
+.form-wrap {
+  background: var(--surface-color);
+  border-radius: 5px;
+  padding: 0;
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+}
+
+/* Progress bar */
+.form-steps {
+  display: flex;
+  background: color-mix(in srgb, var(--accent-color), transparent 94%);
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.form-steps .step {
+  flex: 1;
+  text-align: center;
+  padding: 18px 8px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-subtle);
+  position: relative;
+  transition: 0.3s;
+}
+
+.form-steps .step .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--default-color), transparent 82%);
+  color: #fff;
+  font-size: var(--fs-xs);
+  margin-right: 7px;
+  transition: 0.3s;
+}
+
+.form-steps .step.active {
+  color: var(--accent-color);
+}
+
+.form-steps .step.active .num {
+  background: var(--accent-color);
+}
+
+.form-steps .step.done .num {
+  background: var(--color-success);
+}
+
+.form-steps .step.done {
+  color: var(--color-success);
+}
+
+@media (max-width: 768px) {
+  .form-steps .step .label {
+    display: none;
+  }
+  .form-steps .step .num {
+    margin-right: 0;
+  }
+}
+
+.form-body {
+  padding: 34px 38px;
+}
+
+@media (max-width: 768px) {
+  .form-body {
+    padding: 24px 20px;
+  }
+}
+
+.form-panel {
+  display: none;
+}
+
+.form-panel.active {
+  display: block;
+  animation: bamFade 0.35s ease;
+}
+
+@keyframes bamFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.form-panel h4 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.form-panel .panel-hint {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.form-wrap label.field-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  color: var(--text-muted);
+}
+
+.form-wrap label.field-label .req {
+  color: var(--color-danger);
+}
+
+.form-wrap label.field-label .opt {
+  color: var(--text-subtle);
+  font-weight: 400;
+  font-size: 0.86em;
+}
+
+.form-wrap .form-control,
+.form-wrap .form-select {
+  border-color: var(--text-faint);
+  font-size: var(--fs-base);
+  padding: 10px 14px;
+}
+
+.form-wrap .form-control:focus,
+.form-wrap .form-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color), transparent 86%);
+}
+
+.field-help {
+  font-size: var(--fs-2xs);
+  color: var(--text-subtle);
+  margin-top: 5px;
+}
+
+.field-error {
+  font-size: var(--fs-2xs);
+  color: var(--color-danger);
+  margin-top: 5px;
+  display: none;
+}
+
+.has-error .form-control,
+.has-error .form-select {
+  border-color: var(--color-danger);
+}
+
+.has-error .field-error {
+  display: block;
+}
+
+.form-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+/* File upload drop zone */
+.upload-zone {
+  border: 2px dashed color-mix(in srgb, var(--accent-color), transparent 62%);
+  border-radius: 5px;
+  padding: 34px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.25s;
+  background: color-mix(in srgb, var(--accent-color), transparent 97%);
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+  border-color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+}
+
+.upload-zone i {
+  font-size: 40px;
+  color: var(--accent-color);
+}
+
+.upload-zone p {
+  margin: 10px 0 2px;
+  font-weight: 600;
+  font-size: var(--fs-base);
+}
+
+.upload-zone small {
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+}
+
+.upload-file {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  background: color-mix(in srgb, var(--accent-color), transparent 94%);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 75%);
+  border-radius: 5px;
+  padding: 13px 16px;
+  margin-top: 14px;
+}
+
+.upload-file.show {
+  display: flex;
+}
+
+.upload-file i.doc {
+  font-size: 24px;
+  color: var(--accent-color);
+}
+
+.upload-file .fname {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  word-break: break-all;
+  line-height: 1.35;
+}
+
+.upload-file .fsize {
+  font-size: var(--fs-2xs);
+  color: var(--text-subtle);
+}
+
+.upload-file button {
+  margin-left: auto;
+  background: none;
+  border: 0;
+  color: var(--color-danger);
+  cursor: pointer;
+  font-size: 19px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Review step */
+.review-block {
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+  border-radius: 5px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+.review-block h6 {
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 12px;
+}
+
+.review-row {
+  display: flex;
+  gap: 14px;
+  padding: 6px 0;
+  font-size: var(--fs-sm);
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 94%);
+}
+
+.review-row:last-child {
+  border-bottom: 0;
+}
+
+.review-row .k {
+  flex: 0 0 165px;
+  color: var(--text-muted);
+}
+
+.review-row .v {
+  font-weight: 500;
+  word-break: break-word;
+}
+
+@media (max-width: 576px) {
+  .review-row {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .review-row .k {
+    flex: none;
+    font-size: var(--fs-2xs);
+  }
+}
+
+/* Success panel */
+.form-success {
+  text-align: center;
+  padding: 30px 10px;
+}
+
+.form-success i {
+  font-size: 64px;
+  color: var(--color-success);
+}
+
+.form-success h3 {
+  margin: 16px 0 8px;
+  font-size: 26px;
+}
+
+.form-success .ref-box {
+  display: inline-block;
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+  border: 1px dashed var(--accent-color);
+  border-radius: 5px;
+  padding: 14px 28px;
+  margin: 18px 0;
+}
+
+.form-success .ref-box span {
+  display: block;
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+}
+
+.form-success .ref-box strong {
+  font-size: 22px;
+  color: var(--accent-color);
+  letter-spacing: 1px;
+}
+
+/* Repeatable entry rows (experience / education) */
+.entry-row {
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  background: color-mix(in srgb, var(--default-color), transparent 98%);
+}
+
+.entry-row .entry-remove {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: 0;
+  color: var(--color-danger);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.entry-row h6 {
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--accent-color);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/*--------------------------------------------------------------
+# CV builder: template picker
+--------------------------------------------------------------*/
+.tpl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 768px) {
+  .tpl-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tpl-card {
+  border: 2px solid color-mix(in srgb, var(--default-color), transparent 88%);
+  border-radius: 5px;
+  padding: 14px;
+  cursor: pointer;
+  transition: 0.25s;
+  background: var(--surface-color);
+  text-align: center;
+}
+
+.tpl-card:hover {
+  border-color: color-mix(in srgb, var(--accent-color), transparent 45%);
+}
+
+.tpl-card.selected {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color), transparent 88%);
+}
+
+.tpl-card .tpl-thumb {
+  height: 150px;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #f1ede3;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px;
+}
+
+.tpl-card .tpl-thumb svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tpl-card h5 {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.tpl-card p {
+  font-size: var(--fs-2xs);
+  color: var(--text-muted);
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+/* ATS score meter */
+.ats-meter {
+  background: var(--surface-color);
+  border-radius: 5px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 100px;
+}
+
+.ats-meter h5 {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.ats-score {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-color);
+}
+
+.ats-score small {
+  font-size: 16px;
+  color: var(--text-subtle);
+  font-weight: 400;
+}
+
+.ats-bar {
+  height: 8px;
+  background: color-mix(in srgb, var(--default-color), transparent 88%);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 12px 0 18px;
+}
+
+.ats-bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent-color);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.ats-checks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ats-checks li {
+  font-size: var(--fs-xs);
+  padding: 6px 0 6px 24px;
+  position: relative;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.ats-checks li::before {
+  font-family: "bootstrap-icons";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  font-size: var(--fs-sm);
+}
+
+.ats-checks li.pass::before {
+  content: "\F26B";
+  color: var(--color-success);
+}
+
+.ats-checks li.fail::before {
+  content: "\F62A";
+  color: var(--text-subtle);
+}
+
+/*--------------------------------------------------------------
+# CV live preview (screen) — the printable sheet
+--------------------------------------------------------------*/
+.cv-preview-shell {
+  background: color-mix(in srgb, var(--default-color), transparent 92%);
+  padding: 24px;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+#cv-sheet {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #f1ede3;
+  color: #222;
+  box-shadow: 0 4px 26px rgba(0, 0, 0, 0.16);
+  transform-origin: top center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Scale the A4 sheet down on narrow screens so it stays visible */
+@media (max-width: 1400px) {
+  #cv-sheet { transform: scale(0.78); }
+  .cv-preview-shell { max-height: 900px; }
+}
+
+@media (max-width: 1199px) {
+  #cv-sheet { transform: scale(0.62); }
+}
+
+@media (max-width: 991px) {
+  #cv-sheet { transform: scale(0.5); }
+  .cv-preview-shell { padding: 10px; }
+}

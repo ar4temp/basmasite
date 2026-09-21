@@ -1,0 +1,201 @@
+/**
+ * clients.css — client marquee + certificates grid
+ * Additive only. Uses existing theme tokens from main.css; nothing overridden.
+ */
+
+/* ============================================================
+   CLIENT MARQUEE
+   Pure CSS infinite scroll. The track holds the logo set twice,
+   so translateX(-50%) lands exactly on the duplicate and loops
+   with no visible jump.
+   ============================================================ */
+
+.client-marquee {
+  padding: 50px 0;
+  background-color: var(--surface-color);
+  border-top: 1px solid color-mix(in srgb, var(--color-brand), transparent 88%);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-brand), transparent 88%);
+  overflow: hidden;
+}
+
+.client-marquee .marquee-heading {
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.client-marquee .marquee-heading p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* Fade the edges so logos enter and leave softly instead of clipping */
+.client-marquee .marquee-viewport {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 150px;
+  /* No flex centring here. The track is deliberately wider than this box,
+     so centring a child that overflows pushes it off BOTH edges and the
+     animation starts mid-sequence with logos already clipped. */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.client-marquee .marquee-track {
+  display: flex;
+  align-items: center;
+  /* justify-content is intentionally absent. width:max-content means the
+     track has NEGATIVE free space, and justify-content:center distributes
+     negative space by overflowing equally on both sides — the track began
+     shifted left by half its overhang, which is what broke the loop and
+     clipped logos at the left edge. It must start at x=0. */
+  width: max-content;
+  height: 100%;
+  animation: bam-marquee 42s linear infinite;
+}
+
+.client-marquee .marquee-track img {
+  /* Master raised this from 62px because the logos read too small, which was
+     right. Capped at the artwork's native 130px instead of master's 150px:
+     the PNGs are 320x130, so 150 would upscale them 15% and soften the
+     edges. 130 is the largest size that stays pixel-exact. */
+  height: 130px;
+  width: auto;
+  /* Flex items shrink by default. Without this the browser squeezes the
+     logos to try to fit the track into the viewport, distorting them. */
+  flex-shrink: 0;
+  margin: 0 34px;
+  opacity: 0.55;
+  filter: grayscale(100%);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.client-marquee .marquee-track img:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+/* Pause on hover so a visitor can actually read a logo */
+.client-marquee .marquee-viewport:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes bam-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Respect users who ask for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .client-marquee .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    /* Safe to centre here: the track is width:100% and wraps, so free
+       space is positive. This is the one case centring is correct. */
+    justify-content: center;
+    width: 100%;
+  }
+  .client-marquee .marquee-track img {
+    flex-shrink: 1;
+    margin: 14px 22px;
+  }
+  /* The second set exists only to make the scroll seamless. With the
+     animation off it would just print every client twice. */
+  .client-marquee .marquee-track img[aria-hidden="true"] {
+    display: none;
+  }
+  .client-marquee .marquee-viewport {
+    height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .client-marquee { padding: 38px 0; }
+  /* Held smaller on phones: at 130px each logo is 320px wide, which is most
+     of a 375px viewport, so only one would ever be on screen. */
+  .client-marquee .marquee-track img { height: 74px; margin: 0 22px; }
+}
+
+/* ============================================================
+   CERTIFICATES
+   ============================================================ */
+
+.certificates .cert-card {
+  display: block;
+  background: var(--surface-color);
+  border: 1px solid color-mix(in srgb, var(--color-brand), transparent 85%);
+  border-radius: 5px;
+  padding: 14px;
+  height: 100%;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.certificates .cert-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 34px rgba(36, 28, 15, 0.13);
+  border-color: color-mix(in srgb, var(--color-brand), transparent 55%);
+}
+
+.certificates .cert-thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  background: var(--color-tints-0);
+  aspect-ratio: 1 / 1.414;   /* A4 */
+}
+
+.certificates .cert-thumb img {
+  width: 100%;
+  height: 100%;
+  /* `contain`, not `cover`. The thumbs are exactly A4 (440x622) and the box
+     is exactly A4, so nothing is cropped either way today -- but `cover`
+     silently crops if a real scan is ever a slightly different ratio, and
+     the first thing lost is the bottom of the document. `contain` letterboxes
+     against the white card instead, which is the safe failure for a legal
+     document. */
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+}
+
+.certificates .cert-thumb::after {
+  content: "\F4E1";                 /* bootstrap-icons zoom-in */
+  font-family: "bootstrap-icons";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--color-shades-100), transparent 42%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certificates .cert-card:hover .cert-thumb::after { opacity: 1; }
+
+.certificates .cert-name {
+  margin: 14px 4px 3px;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--heading-color);
+  line-height: 1.35;
+}
+
+/* Amber notice marking these as placeholders. Delete this block together with
+   the matching markup once the scanned originals are in place. */
+.certificates .cert-placeholder-note {
+  margin-top: 26px;
+  padding: 13px 18px;
+  border-radius: 5px;
+  background: color-mix(in srgb, #b58e4a, transparent 90%);
+  border: 1px dashed color-mix(in srgb, #b58e4a, transparent 55%);
+  font-size: var(--fs-xs);
+  text-align: center;
+  color: var(--text-muted);
+}

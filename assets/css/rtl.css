@@ -1,0 +1,373 @@
+/**
+ * rtl.css — RTL text-direction support for Saudi Manpower platform
+ *
+ * Enables fluid LTR⟷RTL swapping using logical properties.
+ * Load AFTER refinements.css so this overrides direction-specific rules.
+ */
+
+/* --------------------------------------------------------------
+    RTL BASE
+    -------------------------------------------------------------- */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] * {
+  text-align: start;
+}
+
+/* --------------------------------------------------------------
+    LOGICAL PROPERTY OVERRIDES
+    Replace directional physical properties with logical equivalents
+    so layouts flip automatically when dir="rtl".
+    -------------------------------------------------------------- */
+
+/* Margin */
+[dir="rtl"] .me-auto,
+[dir="rtl"] .me-xl-0 {
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+[dir="rtl"] .me-auto {
+  margin-inline-end: 0;
+}
+
+[dir="rtl"] .mb-2,
+[dir="rtl"] .mb-lg-0 {
+  margin-block-end: var(--mb, 0.5rem);
+}
+
+[dir="rtl"] .ms-auto {
+  margin-inline-start: auto;
+}
+
+/* Padding */
+[dir="rtl"] .ps-0 {
+  padding-inline-start: 0;
+}
+
+[dir="rtl"] .pe-0 {
+  padding-inline-end: 0;
+}
+
+/* Text alignment — use start/end instead of left/right */
+[dir="rtl"] .text-start {
+  text-align: start;
+}
+
+[dir="rtl"] .text-end {
+  text-align: end;
+}
+
+/* Flexbox ordering for RTL */
+[dir="rtl"] .d-flex {
+  flex-direction: row;
+}
+
+[dir="rtl"] .justify-content-between {
+  justify-content: space-between;
+}
+
+/* --------------------------------------------------------------
+    NAVIGATION — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .navmenu ul {
+  flex-direction: row;
+}
+
+[dir="rtl"] .navmenu>ul>li {
+  padding-inline-start: 15px;
+  padding-inline-end: 14px;
+}
+
+[dir="rtl"] .navmenu .dropdown ul {
+  left: auto;
+  right: 14px;
+}
+
+[dir="rtl"] .navmenu .dropdown .dropdown ul {
+  left: auto;
+  right: -90%;
+}
+
+/* --------------------------------------------------------------
+    HERO SLIDER — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .hero-slider .swiper-slide::after {
+  background:
+    linear-gradient(
+      to top,
+      rgba(20, 15, 7, 0.28) 0%,
+      rgba(20, 15, 7, 0.52) 45%,
+      rgba(20, 15, 7, 0.70) 100%
+    );
+}
+
+[dir="rtl"] .hero-slide-content h1 {
+  max-width: 20ch;
+}
+
+[dir="rtl"] .hero-actions {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+/* --------------------------------------------------------------
+    BUTTONS — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .btn-brand,
+[dir="rtl"] .btn-getstarted,
+[dir="rtl"] .btn-brand-outline,
+[dir="rtl"] .cta-btn,
+[dir="rtl"] .php-email-form button[type="submit"],
+[dir="rtl"] .btn-visit {
+  padding-inline: 12px 30px;
+  padding-block: 12px 30px;
+}
+
+[dir="rtl"] .hero-slide-content .btn-get-started,
+[dir="rtl"] .hero-slide-content .btn-watch-video {
+  padding-inline: 14px 34px;
+}
+
+/* --------------------------------------------------------------
+    FORMS — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .form-control,
+[dir="rtl"] .form-select,
+[dir="rtl"] textarea.form-control {
+  padding-inline: 14px;
+}
+
+[dir="rtl"] .form-wrap .form-control,
+[dir="rtl"] .form-wrap .form-select {
+  padding-inline: 14px;
+}
+
+/* --------------------------------------------------------------
+    ICONS & ARROWS — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .bi-arrow-right-circle::before {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .bi-chevron-left::before {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .bi-chevron-right::before {
+  transform: scaleX(-1);
+}
+
+/* --------------------------------------------------------------
+    SIDEBAR / DRAWER — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .drawer {
+  right: auto;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+[dir="rtl"] .drawer.on {
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------------------
+    LOGO LOCKUP — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .header .logo {
+  flex-direction: row;
+}
+
+[dir="rtl"] .footer .footer-about .logo {
+  flex-direction: row;
+}
+
+/* --------------------------------------------------------------
+    BREADCRUMBS — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .breadcrumbs ol li+li::before {
+  content: "/";
+  padding-right: 10px;
+  padding-left: 0;
+}
+
+[dir="rtl"] .breadcrumbs ol {
+  flex-direction: row-reverse;
+}
+
+/* --------------------------------------------------------------
+    PAGINATION — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .hero-slider .hero-pagination {
+  left: auto;
+  right: 0;
+}
+
+/* --------------------------------------------------------------
+    GRID — RTL-safe
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .row {
+  flex-direction: row;
+}
+
+[dir="rtl"] .grid2,
+[dir="rtl"] .grid3 {
+  flex-direction: row;
+}
+
+/* --------------------------------------------------------------
+    PORTFOLIO INFO — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .portfolio-details .portfolio-info {
+  text-align: start;
+}
+
+/* --------------------------------------------------------------
+    SIDEBAR LAYOUTS — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .contact .row.gy-5 > [class*="col-lg-4"] {
+  display: flex;
+}
+
+/* --------------------------------------------------------------
+    BADGE / LABEL — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .job-ref {
+  text-align: right;
+}
+
+[dir="rtl"] .job-urgent {
+  text-align: center;
+}
+
+[dir="rtl"] .pill {
+  text-align: center;
+}
+
+/* --------------------------------------------------------------
+    FOOTER — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .footer .social-links a {
+  margin-inline-start: 4px;
+  margin-inline-end: 0;
+}
+
+[dir="rtl"] .footer .footer-links ul li {
+  padding-inline-start: 10px;
+  padding-inline-end: 10px;
+}
+
+/* --------------------------------------------------------------
+    TESTIMONIALS — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .testimonials .testimonial-item .testimonial-img {
+  margin-inline-end: 0;
+  margin-inline-start: auto;
+}
+
+/* --------------------------------------------------------------
+    BLOG — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .blog-details .post-img {
+  margin-inline-start: 0;
+  margin-inline-end: -30px;
+}
+
+[dir="rtl"] .recent-posts .post-author-img {
+  margin-inline-start: 15px;
+  margin-inline-end: 0;
+}
+
+/* --------------------------------------------------------------
+    COVERAGE — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] #coverage .coverage-stats li {
+  border-inline-start: 1px solid rgba(192, 166, 88, 0.24);
+  border-inline-end: none;
+}
+
+[dir="rtl"] #coverage .coverage-stats li:first-child {
+  border-inline-start: 0;
+}
+
+/* --------------------------------------------------------------
+    CREDENTIALS — RTL swap
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .credential-item {
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------
+    ADMIN RTL
+    -------------------------------------------------------------- */
+
+[dir="rtl"] .admin body,
+[dir="rtl"] .admin {
+  direction: rtl;
+}
+
+[dir="rtl"] .admin .drawer {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .admin .topbar-in {
+  flex-direction: row;
+}
+
+[dir="rtl"] .admin .row-job {
+  flex-direction: row;
+}
+
+/* --------------------------------------------------------------
+    RESPONSIVE RTL ADJUSTMENTS
+    -------------------------------------------------------------- */
+
+@media (max-width: 991px) {
+  [dir="rtl"] .hero-slide-content h1 {
+    max-width: none;
+  }
+
+  [dir="rtl"] .hero-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 575px) {
+  [dir="rtl"] .bam-cc-inner {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+/* --------------------------------------------------------------
+    REDUCED MOTION
+    -------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  [dir="rtl"] * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

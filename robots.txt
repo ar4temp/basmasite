@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /assets/vendor/
+
+Sitemap: https://ar4web.github.io/basma/sitemap.xml

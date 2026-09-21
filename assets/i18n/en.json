@@ -1,0 +1,186 @@
+{
+  "site": {
+    "name": "Basmat Al Mawared"
+  },
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "industries": "Industries",
+    "requestQuote": "Request a Quote"
+  },
+  "hero": {
+    "kicker": "Since 2017 · Riyadh",
+    "title1": "One Workforce.<br>Every Sector.",
+    "title2": "Teams That<br>Keep You Moving",
+    "title3": "Skilled Hands,<br>Certified Trades",
+    "title4": "Trusted by 30+<br>Organisations",
+    "title5": "Spotless,<br>Every Shift",
+    "title6": "Production Lines,<br>Fully Manned",
+    "lead1": "From cleaning and security to logistics and technical trades — licensed, Qiwa-registered teams deployed across the Kingdom."
+  },
+  "featuredServices": {
+    "execRecruitment": {
+      "title": "Executive Recruitment",
+      "desc": "Management, engineering and IT professionals screened and placed under fully compliant contracts."
+    },
+    "blueCollar": {
+      "title": "Blue-Collar Supply",
+      "desc": "Warehouse, hospitality, cleaning and factory personnel supplied on demand across the Kingdom."
+    },
+    "contractStaffing": {
+      "title": "Contract Staffing",
+      "desc": "Flexible short-term project labor with complete payroll management and insurance coverage."
+    },
+    "compliance": {
+      "title": "Compliance Guarantee",
+      "desc": "Qiwa and Muqeem transfers handled end-to-end, aligned with Nitaqat green-tier standards."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "desc": "Operating since 2017. Trusted by more than 30 organisations for legal, compliant and rapid workforce deployment across the Kingdom.",
+    "heading": "We supply <strong>uniformed, background-checked</strong> personnel to <span class=\"accent\">every sector</span> of the Saudi economy.",
+    "p1": "Basmat Al Mawared Company Limited is a licensed manpower supply company based in Riyadh. Since 2017 we have recruited, deployed and managed workforce for logistics, hospitality, cleaning, manufacturing and facilities clients across Saudi Arabia.",
+    "p2": "Every placement is made on a Qiwa contract with WPS salary payment, GOSI registration and medical insurance. Transfers run through Muqeem. We handle Nitaqat alignment so your operation stays in the green tier.",
+    "p3": "Clients keep one point of contact. We supply the people, the uniforms, the paperwork and a replacement if someone does not show. That is the whole offer."
+  },
+  "credentials": {
+    "operatingSince": "Operating Since 2017",
+    "mhrsdLicensed": "MHRSD Licensed",
+    "commercialRegistration": "Commercial Registration",
+    "qiwaVerified": "Qiwa & Muqeem Verified",
+    "wpsCompliant": "WPS Compliant Payroll"
+  },
+  "certificates": {
+    "title": "Licences & Certifications",
+    "commercialRegistration": "Commercial Registration",
+    "recruitmentLicence": "Recruitment Licence",
+    "chamberCommerce": "Chamber of Commerce",
+    "gosi": "GOSI Certificate",
+    "vat": "VAT Registration",
+    "saudization": "Saudization Certificate"
+  },
+  "contact": {
+    "getInTouch": "Get in touch",
+    "location": "Location",
+    "email": "Email",
+    "phone": "Phone",
+    "sendReq": "Send your requirement",
+    "submit": "Submit manpower demand",
+    "namePlaceholder": "Full name *",
+    "companyPlaceholder": "Company *",
+    "workEmailPlaceholder": "Work email *",
+    "mobilePlaceholder": "Mobile (optional)",
+    "manpowerReqPlaceholder": "Manpower requirement *"
+  },
+  "cta": {
+    "title": "Need Workforce at Scale? <em>Deploy in Days</em>, Not Months",
+    "desc": "Warehouse crews, baristas, cleaners, machine operators and general helpers — uniformed, vetted and fully insured, delivered anywhere in the Kingdom with 100% MLSD compliance.",
+    "btn": "Submit Manpower Demand"
+  },
+  "onfocus": {
+    "title": "Fully Compliant, Fully Transparent Workforce Management"
+  },
+  "features": {
+    "title": "Workforce Categories",
+    "tabs": {
+      "logistics": {
+        "title": "Logistics"
+      },
+      "industrial": {
+        "title": "Industrial & Manufacturing"
+      },
+      "facilities": {
+        "title": "Facilities Management"
+      },
+      "administrative": {
+        "title": "Administrative Support"
+      },
+      "technical": {
+        "title": "Skilled Technical & Maintenance"
+      },
+      "helpers": {
+        "title": "General Helpers & Unskilled Labour"
+      }
+    }
+  },
+  "services": {
+    "title": "Our Services"
+  },
+  "pricing": {
+    "title": "Enterprise Manpower Deployment Plans"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q1": {
+      "q": "We ensure full compliance with Saudi labour law through Qiwa and Muqeem registration, WPS payroll administration, and adherence to Nitaqat standards. All workers are properly documented and insured."
+    },
+    "q2": {
+      "q": "Applicants need a transferable Iqama or eligible for sponsorship transfer, a valid passport or national ID, and relevant educational or professional certificates. Specific requirements vary by role."
+    },
+    "q3": {
+      "q": "The process typically takes 2-6 weeks depending on the role, documentation speed, and government processing times for Iqama and Qiwa registration."
+    }
+  },
+  "portfolio": {
+    "title": "Workforce Deployment Case Study",
+    "filters": {
+      "all": "All",
+      "logistics": "Logistics & Warehousing",
+      "hospitality": "Hospitality & Coffee Shops",
+      "cleaning": "Cleaning & Facilities",
+      "helpers": "General Helpers",
+      "industrial": "Manufacturing"
+    }
+  },
+  "coverage": {
+    "kicker": "Nationwide Deployment",
+    "title": "Every Region.<span>Ready to Deploy.</span>",
+    "desc": "From Riyadh to Jeddah, Dammam to NEOM — our uniformed teams mobilise wherever your operation runs.",
+    "stats": {
+      "regions": "Regions Covered",
+      "countries": "Source Countries",
+      "since": "Operating Since"
+    },
+    "btn": "Tell Us What You Need"
+  },
+  "howWeWork": {
+    "title": "How We Work",
+    "steps": {
+      "step1": {
+        "title": "1. Position"
+      },
+      "step2": {
+        "title": "2. Interview"
+      },
+      "step3": {
+        "title": "3. Deployment"
+      },
+      "step4": {
+        "title": "4. Management"
+      }
+    }
+  },
+  "team": {
+    "title": "Our Leadership"
+  },
+  "footer": {
+    "links": {
+      "about": "About Us",
+      "credentials": "Credentials",
+      "certificates": "Certificates",
+      "clients": "Clients",
+      "coverage": "Coverage",
+      "contact": "Contact"
+    },
+    "careers": {
+      "openVacancies": "Open Vacancies",
+      "applyNow": "Apply Now"
+    },
+    "cookiePolicy": "Cookie Policy",
+    "cookieSettings": "Cookie Settings"
+  },
+  "pageTitles": {
+    "home": "Basmat Al Mawared Company Limited"
+  }
+}
