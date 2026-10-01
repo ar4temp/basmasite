@@ -92,7 +92,9 @@
   /* ---------------- translation helper ---------------- */
   function tr(key) {
     if (typeof window.t === 'function') {
-      var v = window.t(key);
+      var v = window.t('cookieConsent.' + key);
+      if (v) return v;
+      v = window.t(key);
       if (v) return v;
     }
     // English fallback — updated when window.t becomes available
@@ -136,13 +138,13 @@
       '<div class="bam-cc-inner">' +
         '<div class="bam-cc-icon"><i class="bi bi-shield-check"></i></div>' +
         '<div class="bam-cc-text">' +
-          '<h4 data-i18n="cookieBannerTitle">' + tr('cookieBannerTitle') + '</h4>' +
-          '<p data-i18n="cookieBannerDesc">' + tr('cookieBannerDesc') + '</p>' +
+          '<h4 data-i18n="cookieConsent.cookieBannerTitle">' + tr('cookieBannerTitle') + '</h4>' +
+          '<p data-i18n="cookieConsent.cookieBannerDesc">' + tr('cookieBannerDesc') + '</p>' +
         '</div>' +
         '<div class="bam-cc-actions">' +
-          '<button type="button" class="bam-cc-btn bam-cc-manage" data-bam="manage" data-i18n="cookieBannerManage">' + tr('cookieBannerManage') + '</button>' +
-          '<button type="button" class="bam-cc-btn bam-cc-reject" data-bam="reject" data-i18n="cookieBannerDecline">' + tr('cookieBannerDecline') + '</button>' +
-          '<button type="button" class="bam-cc-btn bam-cc-accept" data-bam="accept" data-i18n="cookieBannerAccept">' + tr('cookieBannerAccept') + '</button>' +
+          '<button type="button" class="bam-cc-btn bam-cc-manage" data-bam="manage" data-i18n="cookieConsent.cookieBannerManage">' + tr('cookieBannerManage') + '</button>' +
+          '<button type="button" class="bam-cc-btn bam-cc-reject" data-bam="reject" data-i18n="cookieConsent.cookieBannerDecline">' + tr('cookieBannerDecline') + '</button>' +
+          '<button type="button" class="bam-cc-btn bam-cc-accept" data-bam="accept" data-i18n="cookieConsent.cookieBannerAccept">' + tr('cookieBannerAccept') + '</button>' +
         '</div>' +
       '</div>';
 
@@ -155,50 +157,50 @@
       '<div class="bam-cc-modal">' +
         '<div class="bam-cc-modal-head">' +
           '<div>' +
-            '<h3 data-i18n="cookieDialogTitle">' + tr('cookieDialogTitle') + '</h3>' +
-            '<p data-i18n="cookieDialogDesc">' + tr('cookieDialogDesc') + '</p>' +
+            '<h3 data-i18n="cookieConsent.cookieDialogTitle">' + tr('cookieDialogTitle') + '</h3>' +
+            '<p data-i18n="cookieConsent.cookieDialogDesc">' + tr('cookieDialogDesc') + '</p>' +
           '</div>' +
-          '<button type="button" class="bam-cc-close" data-bam="close" data-i18n="cookieDialogClose" aria-label="' + tr('cookieDialogClose') + '">&times;</button>' +
+          '<button type="button" class="bam-cc-close" data-bam="close" data-i18n="cookieConsent.cookieDialogClose" aria-label="' + tr('cookieDialogClose') + '">&times;</button>' +
         '</div>' +
 
         '<div class="bam-cc-modal-body">' +
 
           '<div class="bam-cc-group">' +
             '<div class="bam-cc-group-top">' +
-              '<h5 data-i18n="cookieEssential">' + tr('cookieEssential') + '</h5>' +
-              '<span data-i18n="cookieAlwaysOn">' + tr('cookieAlwaysOn') + '</span>' +
+              '<h5 data-i18n="cookieConsent.cookieEssential">' + tr('cookieEssential') + '</h5>' +
+              '<span data-i18n="cookieConsent.cookieAlwaysOn">' + tr('cookieAlwaysOn') + '</span>' +
             '</div>' +
-            '<p data-i18n="cookieEssentialDesc">' + tr('cookieEssentialDesc') + '</p>' +
+            '<p data-i18n="cookieConsent.cookieEssentialDesc">' + tr('cookieEssentialDesc') + '</p>' +
           '</div>' +
 
           '<div class="bam-cc-group">' +
             '<div class="bam-cc-group-top">' +
-              '<h5 data-i18n="cookieFunctional">' + tr('cookieFunctional') + '</h5>' +
+              '<h5 data-i18n="cookieConsent.cookieFunctional">' + tr('cookieFunctional') + '</h5>' +
               '<label class="bam-cc-switch">' +
                 '<input type="checkbox" data-bam-pref="functional" aria-label="' + tr('cookieAllowFunctional') + '">' +
                 '<span class="bam-cc-slider"></span>' +
               '</label>' +
             '</div>' +
-            '<p data-i18n="cookieFunctionalDesc">' + tr('cookieFunctionalDesc') + '</p>' +
+            '<p data-i18n="cookieConsent.cookieFunctionalDesc">' + tr('cookieFunctionalDesc') + '</p>' +
           '</div>' +
 
           '<div class="bam-cc-group">' +
             '<div class="bam-cc-group-top">' +
-              '<h5 data-i18n="cookieAnalytics">' + tr('cookieAnalytics') + '</h5>' +
+              '<h5 data-i18n="cookieConsent.cookieAnalytics">' + tr('cookieAnalytics') + '</h5>' +
               '<label class="bam-cc-switch">' +
                 '<input type="checkbox" data-bam-pref="analytics" aria-label="' + tr('cookieAllowAnalytics') + '">' +
                 '<span class="bam-cc-slider"></span>' +
               '</label>' +
             '</div>' +
-            '<p data-i18n="cookieAnalyticsDesc">' + tr('cookieAnalyticsDesc') + '</p>' +
+            '<p data-i18n="cookieConsent.cookieAnalyticsDesc">' + tr('cookieAnalyticsDesc') + '</p>' +
           '</div>' +
 
         '</div>' +
 
         '<div class="bam-cc-modal-foot">' +
-          '<button type="button" class="bam-cc-btn bam-cc-reject" data-bam="reject" data-i18n="cookieDialogDeclineAll">' + tr('cookieDialogDeclineAll') + '</button>' +
-          '<button type="button" class="bam-cc-btn bam-cc-manage" data-bam="savePrefs" data-i18n="cookieDialogSave">' + tr('cookieDialogSave') + '</button>' +
-          '<button type="button" class="bam-cc-btn bam-cc-accept" data-bam="accept" data-i18n="cookieBannerAccept">' + tr('cookieBannerAccept') + '</button>' +
+          '<button type="button" class="bam-cc-btn bam-cc-reject" data-bam="reject" data-i18n="cookieConsent.cookieDialogDeclineAll">' + tr('cookieDialogDeclineAll') + '</button>' +
+          '<button type="button" class="bam-cc-btn bam-cc-manage" data-bam="savePrefs" data-i18n="cookieConsent.cookieDialogSave">' + tr('cookieDialogSave') + '</button>' +
+          '<button type="button" class="bam-cc-btn bam-cc-accept" data-bam="accept" data-i18n="cookieConsent.cookieBannerAccept">' + tr('cookieBannerAccept') + '</button>' +
         '</div>' +
       '</div>';
 

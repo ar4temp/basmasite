@@ -8,8 +8,8 @@
 (async function () {
   "use strict";
 
-  const t = (key) => {
-    if (window.t) return window.t(key);
+  const t = (key, vars) => {
+    if (window.t) return window.t(key, vars);
     if (window.dictAr && window.dictAr[key] != null) return window.dictAr[key];
     if (window.dictEn) return window.dictEn[key];
     return key;
@@ -19,6 +19,10 @@
   if (!list) return;
 
   if (window.BAM_JOBS_READY) { try { await window.BAM_JOBS_READY; } catch (e) {} }
+
+  /* Wait for the i18n dictionaries so the first render is already translated
+     (t() returns undefined until en.json/ar.json finish loading). */
+  if (window.BAM_I18N_READY) { try { await window.BAM_I18N_READY; } catch (e) {} }
 
   const jobs = (window.BAM_JOBS || []).filter((j) => j.active !== false);
   const filterBar = document.querySelector('#job-filters');
@@ -114,8 +118,8 @@
       +           esc(j.id) + ' \u00b7 ' + esc(j.category) + '</span>'
       +       '</div>'
       +       (j.urgent
-      +         ? '<span class=\"job-urgent\">' + t('careers.urgent') + '</span>'
-      +         : '') +
+            ? '<span class=\"job-urgent\">' + t('careers.urgent') + '</span>'
+            : '')
       +     '</div>'
 
       +     '<div class=\"job-meta\">'
@@ -130,20 +134,20 @@
 
       +     '<div class=\"job-detail\" id=\"detail-' + esc(j.id) + '\">'
       +       (reqs
-      +         ? '<h5>' + t('careers.requirements') + '</h5><ul>' + reqs + '</ul>'
-      +         : '') +
+            ? '<h5>' + t('careers.requirements') + '</h5><ul>' + reqs + '</ul>'
+            : '')
       +       (bens
-      +         ? '<h5>' + t('careers.whatWeOffer') + '</h5><ul>' + bens + '</ul>'
-      +         : '') +
+            ? '<h5>' + t('careers.whatWeOffer') + '</h5><ul>' + bens + '</ul>'
+            : '')
       +     '</div>'
 
       +     '<div class=\"job-actions\">'
       +       '<a class=\"btn-brand\" href=\"apply.html?job='
-      +         + encodeURIComponent(j.id) + '\">' + t('careers.applyNow') + '</a>'
+      +         encodeURIComponent(j.id) + '\">' + t('careers.applyNow') + '</a>'
       +       '<button type=\"button\" class=\"job-toggle\" aria-expanded=\"false\" '
-      +         + 'aria-controls=\"detail-' + esc(j.id) + '\" data-toggle=\"' + esc(j.id) + '\">'
-      +         + '<span class=\"t\">' + t('careers.viewDetails') + '</span>'
-      +         + ' <i class=\"bi bi-chevron-down\"></i>'
+      +         'aria-controls=\"detail-' + esc(j.id) + '\" data-toggle=\"' + esc(j.id) + '\">'
+      +         '<span class=\"t\">' + t('careers.viewDetails') + '</span>'
+      +         ' <i class=\"bi bi-chevron-down\"></i>'
       +       '</button>'
       +       '<span class=\"job-posted\">' + daysAgo(j.posted) + '</span>'
       +     '</div>'
@@ -182,7 +186,7 @@
       toolbar.style.display = noneAtAll ? 'none' : '';
 
     countEl.textContent = out.length
-      ? t('careers.showingCount', [out.length, jobs.length])
+      ? t('careers.resultCount', { count: out.length, total: jobs.length })
       : '';
   }
 

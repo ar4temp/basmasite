@@ -28,6 +28,10 @@
 
   if (window.BAM_JOBS_READY) { try { await window.BAM_JOBS_READY; } catch (e) {} }
 
+  /* Wait for the i18n dictionaries so labels/placeholders/review rows
+     are translated on first render (t() returns undefined until loaded). */
+  if (window.BAM_I18N_READY) { try { await window.BAM_I18N_READY; } catch (e) {} }
+
   const jobs = (window.BAM_JOBS || []).filter((j) => j.active !== false);
   const panels = Array.from(form.querySelectorAll('.form-panel'));
   const steps  = Array.from(document.querySelectorAll('#form-steps .step'));

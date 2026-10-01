@@ -58,7 +58,10 @@
 
   // Expose a global translator so page scripts (careers.js, apply.js)
   // can translate dynamic content without importing i18n internals.
-  function t(key) {
+  // Supports optional placeholder variables, e.g.
+  //   t('careers.resultCount', { count: 3, total: 10 })
+  //   t('careers.postedDaysAgo', [5])   -> replaces {n} and {0}
+  function t(key, vars) {
     var dict = getCurrentDict();
     var parts = key.split('.');
     var val = dict;
@@ -66,7 +69,22 @@
       if (val && typeof val === 'object' && parts[i] in val) { val = val[parts[i]]; }
       else { return undefined; }
     }
-    return typeof val === 'string' ? val : undefined;
+    if (typeof val !== 'string') return undefined;
+    if (vars) {
+      if (Array.isArray(vars)) {
+        val = val.split('{n}').join(String(vars[0]));
+        for (var j = 0; j < vars.length; j++) {
+          val = val.split('{' + j + '}').join(String(vars[j]));
+        }
+      } else {
+        for (var k in vars) {
+          if (Object.prototype.hasOwnProperty.call(vars, k)) {
+            val = val.split('{' + k + '}').join(String(vars[k]));
+          }
+        }
+      }
+    }
+    return val;
   }
   window.t = t;
   window._bam_i18n_lang = currentLang;
@@ -74,7 +92,13 @@
   function deepMerge(target, source) {
     for (var key in source) {
       if (source.hasOwnProperty(key)) {
-        if (typeof source[key] === 'object' && source[key] !== null && !Array.isArray(source[key]) && typeof target[key] === 'object' && target[key] !== null && !Array.isArray(target[key])) {
+        if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+          // Always merge into a fresh object: assigning the source subtree by
+          // reference would let later merges mutate the original dictionary
+          // (dictEn was being overwritten with Arabic this way).
+          if (!target[key] || typeof target[key] !== 'object' || Array.isArray(target[key])) {
+            target[key] = {};
+          }
           deepMerge(target[key], source[key]);
         } else {
           target[key] = source[key];
@@ -84,7 +108,10 @@
   }
 
   function loadDicts() {
-    Promise.all([
+    // Exposed so page scripts (careers.js, apply.js) can await the dictionaries
+    // before their first render — otherwise t() returns undefined and dynamic
+    // content shows "undefined" until a language switch forces a re-render.
+    window.BAM_I18N_READY = Promise.all([
       fetch('assets/i18n/en.json').then(function(r){ return r.json(); }).then(function(d){ dictEn = d; dictLoaded.en = true; }),
       fetch('assets/i18n/ar.json').then(function(r){ return r.json(); }).then(function(d){ dictAr = d; dictLoaded.ar = true; })
     ]).then(function () { translatePage(); }).catch(function() {});
@@ -196,9 +223,13 @@
     header.appendChild(toggle);
   }
 
+  // Start fetching the dictionaries right away (no DOM needed) so that
+  // window.BAM_I18N_READY exists for scripts that load after this one and
+  // await it before their first render. DOM-dependent work waits for the DOM.
+  loadDicts();
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { createToggle(); loadDicts(); setLang(getPreferredLang()); });
+    document.addEventListener('DOMContentLoaded', function () { createToggle(); setLang(getPreferredLang()); });
   } else {
-    createToggle(); loadDicts(); setLang(getPreferredLang());
+    createToggle(); setLang(getPreferredLang());
   }
 })();
