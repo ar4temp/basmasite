@@ -46,9 +46,9 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#portfolio">Industries</a></li>
+          <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+          <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
+          <li><a href="index.html#portfolio" data-i18n="nav.industries">Industries</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -119,7 +119,9 @@
                 <i class="bi bi-search"></i>
                 <input type="text" id="job-search" class="form-control"
                        placeholder="Search by job title, location or reference..."
-                       aria-label="Search vacancies">
+                       data-i18n-placeholder="careers.searchPlaceholder"
+                       aria-label="Search vacancies"
+                       data-i18n-aria="careers.searchAriaLabel">
               </div>
             </div>
             <div class="col-lg-7">
@@ -140,7 +142,7 @@
         <!-- Shown when a search or filter matches nothing -->
         <div class="job-empty" id="job-empty" hidden>
           <i class="bi bi-search"></i>
-          <h4>No vacancies match your search</h4>
+              <h4 data-i18n="careers.emptySearchTitle">No vacancies match your search</h4>
           <p data-i18n="careers.tryDifferentKeyword">Try a different keyword, or clear the filters to see all open roles.</p>
           <button type="button" id="job-clear" class="btn-brand-outline" data-i18n="careers.clearFilters">Clear Filters</button>
         </div>
@@ -152,7 +154,7 @@
           <p data-i18n="careers.noneOpenText">New requirements come in from our clients every week, and they are often filled from
              candidates already registered with us before the role is ever advertised.
              Register now and we will contact you the moment something matches your profile.</p>
-          <a href="apply.html" class="btn-brand">Register for Future Openings</a>
+          <a href="apply.html" class="btn-brand" data-i18n="careers.registerFuture">Register for Future Openings</a>
         </div>
 
       </div>
@@ -169,7 +171,7 @@
               <p class="mb-0" data-i18n="careers.registerAnyway">Register your details anyway. We add every qualified candidate to our talent pool and contact them directly when a matching vacancy opens. Most of our placements come from this pool before a role is ever advertised.</p>
             </div>
             <div class="col-lg-4 text-lg-end">
-              <a href="apply.html" class="btn-brand">Register Your Interest</a>
+              <a href="apply.html" class="btn-brand" data-i18n="careers.registerInterest">Register Your Interest</a>
             </div>
           </div>
         </div>

@@ -92,7 +92,9 @@
   /* ---------------- translation helper ---------------- */
   function tr(key) {
     if (typeof window.t === 'function') {
-      var v = window.t(key);
+      // The consent strings are namespaced under "cookieConsent" in the
+      // dictionaries, but callers pass the bare key.
+      var v = window.t('cookieConsent.' + key) || window.t(key);
       if (v) return v;
     }
     // English fallback — updated when window.t becomes available
@@ -307,10 +309,34 @@
       }, 700);
     }
 
-    // Any element with data-bam-cookie-settings opens the dialog (footer link).
     document.addEventListener('click', e => {
-      const t = e.target.closest('[data-bam-cookie-settings]');
-      if (t) { e.preventDefault(); window.BamConsent.reopen(); }
+      const settings = e.target.closest('[data-bam-cookie-settings]');
+      if (settings) { e.preventDefault(); window.BamConsent.reopen(); return; }
+
+      const actionBtn = e.target.closest('[data-bam]');
+      if (!actionBtn) return;
+      const action = actionBtn.getAttribute('data-bam');
+      if (action === 'accept') {
+        save({ essential: true, functional: true, analytics: true });
+        closeAll();
+      } else if (action === 'reject') {
+        save({ essential: true, functional: false, analytics: false });
+        closeAll();
+      } else if (action === 'manage') {
+        syncToggles();
+        const overlay = document.querySelector('.bam-cc-overlay');
+        if (overlay) overlay.classList.add('show');
+      } else if (action === 'savePrefs') {
+        const next = { essential: true, functional: false, analytics: false };
+        document.querySelectorAll('[data-bam-pref]').forEach(i => {
+          next[i.dataset.bamPref] = !!i.checked;
+        });
+        save(next);
+        closeAll();
+      } else if (action === 'close') {
+        const overlay = document.querySelector('.bam-cc-overlay');
+        if (overlay) overlay.classList.remove('show');
+      }
     });
   }
 

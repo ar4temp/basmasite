@@ -413,7 +413,9 @@
   });
 
   /* ---- re-render when language changes ---- */
-  window._bam_on_lang_change = () => {
+  const prevLangChange = window._bam_on_lang_change;
+  window._bam_on_lang_change = (lang) => {
+    if (typeof prevLangChange === 'function') prevLangChange(lang);
     showBrief();
     if (current === LAST) buildReview();
     idType.dispatchEvent(new Event('change'));

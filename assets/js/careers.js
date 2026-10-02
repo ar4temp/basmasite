@@ -8,12 +8,7 @@
 (async function () {
   "use strict";
 
-  const t = (key) => {
-    if (window.t) return window.t(key);
-    if (window.dictAr && window.dictAr[key] != null) return window.dictAr[key];
-    if (window.dictEn) return window.dictEn[key];
-    return key;
-  };
+  const t = (key, vars) => (window.t ? window.t(key, vars) : key);
 
   const list = document.querySelector('#job-list');
   if (!list) return;
@@ -41,10 +36,10 @@
     const diff = Math.floor((Date.now() - then.getTime()) / 86400000);
     if (diff <= 0)  return t('careers.postedToday');
     if (diff === 1) return t('careers.postedYesterday');
-    if (diff < 7)   return t('careers.postedDaysAgo', [diff]);
-    if (diff < 14)  return t('careers.postedWeeksAgo', [1]);
-    if (diff < 60)  return t('careers.postedWeeksAgo', [Math.floor(diff / 7)]);
-    return t('careers.postedMonthsAgo', [Math.floor(diff / 30)]);
+    if (diff < 7)   return t('careers.postedDaysAgo', { n: diff });
+    if (diff < 14)  return t('careers.postedWeeksAgo', { n: 1 });
+    if (diff < 60)  return t('careers.postedWeeksAgo', { n: Math.floor(diff / 7) });
+    return t('careers.postedMonthsAgo', { n: Math.floor(diff / 30) });
   }
 
   /* ---- headline stats ---- */
@@ -75,24 +70,29 @@
 
   /* ---- filters ---- */
 
+  let filtersBound = false;
   function buildFilters() {
+    if (!filterBar) return;
     const cats = ['All', ...Array.from(new Set(jobs.map((j) => j.category)))];
     filterBar.innerHTML = cats.map((c) => {
       const n = c === 'All' ? jobs.length : jobs.filter((j) => j.category === c).length;
-      return '<button type=\"button\" data-cat=\"' + esc(c) + '\"'
-        + (c === 'All' ? ' class=\"active\"' : '') + '>'
+      return '<button type="button" data-cat="' + esc(c) + '"'
+        + (c === activeCat ? ' class="active"' : '') + '>'
         + esc(c)
-        + ' <span style=\"opacity:.65\">(' + n + ')</span></button>';
+        + ' <span style="opacity:.65">(' + n + ')</span></button>';
     }).join('');
 
-    filterBar.addEventListener('click', (e) => {
-      const btn = e.target.closest('button');
-      if (!btn) return;
-      activeCat = btn.dataset.cat;
-      filterBar.querySelectorAll('button').forEach((b) =>
-        b.classList.toggle('active', b === btn));
-      render();
-    });
+    if (!filtersBound) {
+      filtersBound = true;
+      filterBar.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        activeCat = btn.dataset.cat;
+        filterBar.querySelectorAll('button').forEach((b) =>
+          b.classList.toggle('active', b === btn));
+        render();
+      });
+    }
   }
 
   /* ---- card markup ---- */
@@ -104,50 +104,45 @@
       ? j.vacancies + ' ' + t('careers.positionsPlural')
       : '1 ' + t('careers.positionsSingular');
 
-    return ''
-      + '<div class=\"col-lg-6\">'
-      +   '<article class=\"job-card\">'
-      +     '<div class=\"job-card-head\">'
-      +       '<div>'
-      +         '<h3>' + esc(j.title) + '</h3>'
-      +         '<span class=\"job-ref\">' + t('careers.ref') + ' '
-      +           esc(j.id) + ' \u00b7 ' + esc(j.category) + '</span>'
-      +       '</div>'
-      +       (j.urgent
-      +         ? '<span class=\"job-urgent\">' + t('careers.urgent') + '</span>'
-      +         : '') +
+    return '<div class="col-lg-6">'
+      + '<article class="job-card">'
+      +   '<div class="job-card-head">'
+      +     '<div>'
+      +       '<h3>' + esc(j.title) + '</h3>'
+      +       '<span class="job-ref">' + t('careers.ref') + ' '
+      +         esc(j.id) + ' \u00b7 ' + esc(j.category) + '</span>'
       +     '</div>'
-
-      +     '<div class=\"job-meta\">'
-      +       '<span><i class=\"bi bi-geo-alt\"></i>' + esc(j.location) + '</span>'
-      +       '<span><i class=\"bi bi-briefcase\"></i>' + esc(j.type) + '</span>'
-      +       '<span><i class=\"bi bi-bar-chart\"></i>' + esc(j.experience) + '</span>'
-      +       '<span><i class=\"bi bi-people\"></i>' + posText + '</span>'
-      +       '<span><i class=\"bi bi-cash-coin\"></i>' + esc(j.salary) + '</span>'
-      +     '</div>'
-
-      +     '<p class=\"job-summary\">' + esc(j.summary) + '</p>'
-
-      +     '<div class=\"job-detail\" id=\"detail-' + esc(j.id) + '\">'
-      +       (reqs
-      +         ? '<h5>' + t('careers.requirements') + '</h5><ul>' + reqs + '</ul>'
-      +         : '') +
-      +       (bens
-      +         ? '<h5>' + t('careers.whatWeOffer') + '</h5><ul>' + bens + '</ul>'
-      +         : '') +
-      +     '</div>'
-
-      +     '<div class=\"job-actions\">'
-      +       '<a class=\"btn-brand\" href=\"apply.html?job='
-      +         + encodeURIComponent(j.id) + '\">' + t('careers.applyNow') + '</a>'
-      +       '<button type=\"button\" class=\"job-toggle\" aria-expanded=\"false\" '
-      +         + 'aria-controls=\"detail-' + esc(j.id) + '\" data-toggle=\"' + esc(j.id) + '\">'
-      +         + '<span class=\"t\">' + t('careers.viewDetails') + '</span>'
-      +         + ' <i class=\"bi bi-chevron-down\"></i>'
-      +       '</button>'
-      +       '<span class=\"job-posted\">' + daysAgo(j.posted) + '</span>'
-      +     '</div>'
-      +   '</article>'
+      +     (j.urgent
+              ? '<span class="job-urgent">' + t('careers.urgent') + '</span>'
+              : '')
+      +   '</div>'
+      +   '<div class="job-meta">'
+      +     '<span><i class="bi bi-geo-alt"></i>' + esc(j.location) + '</span>'
+      +     '<span><i class="bi bi-briefcase"></i>' + esc(j.type) + '</span>'
+      +     '<span><i class="bi bi-bar-chart"></i>' + esc(j.experience) + '</span>'
+      +     '<span><i class="bi bi-people"></i>' + posText + '</span>'
+      +     '<span><i class="bi bi-cash-coin"></i>' + esc(j.salary) + '</span>'
+      +   '</div>'
+      +   '<p class="job-summary">' + esc(j.summary) + '</p>'
+      +   '<div class="job-detail" id="detail-' + esc(j.id) + '">'
+      +     (reqs
+              ? '<h5>' + t('careers.requirements') + '</h5><ul>' + reqs + '</ul>'
+              : '')
+      +     (bens
+              ? '<h5>' + t('careers.whatWeOffer') + '</h5><ul>' + bens + '</ul>'
+              : '')
+      +   '</div>'
+      +   '<div class="job-actions">'
+      +     '<a class="btn-brand" href="apply.html?job='
+      +       encodeURIComponent(j.id) + '">' + t('careers.applyNow') + '</a>'
+      +     '<button type="button" class="job-toggle" aria-expanded="false" '
+      +       'aria-controls="detail-' + esc(j.id) + '" data-toggle="' + esc(j.id) + '">'
+      +       '<span class="t">' + t('careers.viewDetails') + '</span>'
+      +       ' <i class="bi bi-chevron-down"></i>'
+      +     '</button>'
+      +     '<span class="job-posted">' + daysAgo(j.posted) + '</span>'
+      +   '</div>'
+      + '</article>'
       + '</div>';
   }
 
@@ -181,9 +176,11 @@
     if (toolbar)
       toolbar.style.display = noneAtAll ? 'none' : '';
 
-    countEl.textContent = out.length
-      ? t('careers.showingCount', [out.length, jobs.length])
-      : '';
+    if (countEl) {
+      countEl.textContent = out.length
+        ? t('careers.showCount', { show: out.length, total: jobs.length })
+        : '';
+    }
   }
 
   /* ---- expand / collapse ---- */
@@ -229,5 +226,10 @@
   setStats();
 
   /* ---- re-render when language changes ---- */
-  window._bam_on_lang_change = () => { render(); buildFilters(); };
+  const prevLangChange = window._bam_on_lang_change;
+  window._bam_on_lang_change = (lang) => {
+    if (typeof prevLangChange === 'function') prevLangChange(lang);
+    render();
+    buildFilters();
+  };
 })();
